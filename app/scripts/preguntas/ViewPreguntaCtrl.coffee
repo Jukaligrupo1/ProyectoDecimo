@@ -12,6 +12,8 @@ angular.module('WissenSystem')
 		$scope.toggleMostrarAyuda = (pregunta)->
 			pregunta.mostrar_ayuda = !pregunta.mostrar_ayuda
 
+		$scope.asignarExamen = ()->
+			console.log "Asignando pregunta a un exámen"
 
 
 		$scope.indexChar = (index)->

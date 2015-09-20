@@ -7,15 +7,6 @@
   </div>
   <div class="panel-body">
     <form name="frm" role="form" class="form-horizontal">
-      <!--
-      .form-group
-      	label.control-label.col-md-3 With Hint
-      	.col-md-9
-      		input.form-control(type="text" placeholder="Hint Text")
-      		p.text-danger.text-right.xsmall hint description
-      
-      
-      -->
       <div ng-repeat="pregunta in preguntaking.preguntas_traducidas | porIdiomasEdit:idiomaPreg"><a md-ink-ripple class="btn-tag btn-tag-info">Pregunta en {{pregunta.idioma}}</a>
         <div class="definicion-preg">
           <textarea froala="editorOptions" ng-model="pregunta.enunciado"></textarea>
@@ -27,15 +18,15 @@
           </div>
           <div ui-sortable="sortableOptions" ng-model="pregunta.opciones" class="opcionesedit">
             <md-input-container flex ng-repeat="opcion in pregunta.opciones" class="input-group">
-              <label ng-show="!opcion.nueva"><i class="fa fa-sort"> </i>Opción {{$index+1}}:</label>
+              <label ng-show="!opcion.nueva"><i class="fa fa-sort"> </i>Opción {{$index+1}} :</label>
               <input type="text" ng-model="opcion.definicion" ng-class="{ 'textblue':opcion.is_correct, 'add-opcion':opcion.nueva }" ng-focus="addButtonNewOpcion(pregunta, opcion)" class="form-control"><span ng-show="!opcion.nueva" class="input-group-btn">
                 <md-button aria-label="Quitar" ng-click="deleteOption(pregunta, opcion)" class="md-icon-button md-warn">
                   <md-icon class="fa fa-times"></md-icon>
-                  <md-tooltip>Quitar opción</md-tooltip>
+                  <md-tooltip>Quitar opción </md-tooltip>
                 </md-button>
-                <md-button ng-class="{ true:'md-mini md-fab md-primary', false:''}[opcion.is_correct]" aria-label="Correcta" ng-click="setAsCorrect(pregunta, opcion)" class="md-icon-button">
-                  <md-icon class="fa fa-check"></md-icon>
-                  <md-tooltip>Respuesta correcta</md-tooltip>
+                <md-button ng-class="{ true:'md-mini md-fab md-primary', false:''}[opcion.is_correct]" aria-label="Correcta" ng-click="setAsCorrect(pregunta, opcion)" class="md-icon-button"> 
+                  <md-icon class="fa fa-check"> </md-icon>
+                  <md-tooltip>Respuesta correcta </md-tooltip>
                 </md-button></span>
             </md-input-container>
           </div>
