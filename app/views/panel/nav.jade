@@ -30,6 +30,11 @@ nav.site-nav.clearfix(role="navigation")
 				span.text {{ 'CATEGORIAS_MENU' | translate }}
 
 		li(ui-sref-active="active")
+			a(href="" ui-sref="panel.entidades" md-ink-ripple="")
+				i.fa.fa-map-marker
+				span.text {{ 'ENTIDADES_MENU' | translate }}
+
+		li(ui-sref-active="active")
 			a(href="" ui-sref="panel.usuarios" md-ink-ripple="")
 				i.fa.fa-users
 				span.text {{ 'USERS_MENU' | translate }}
