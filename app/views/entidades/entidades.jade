@@ -42,7 +42,7 @@
 											small(ng-bind-html="' ' + $select.selected.nombre")
 										ui-select-choices(repeat="imagen in imagenes | filter: {nombre: $select.search}")
 											img(ng-src="{{ imagen.public?imgSystemPath:perfilPath }}{{ imagen.nombre }}" style="width:25px; height:25px;")
-											small(ng-bind-html="' ' + imagen.nombre | highligth: $select.search")
+											small(ng-bind-html="' ' + imagen.nombre | highlight: $select.search")
 							div(flex)
 								input.form-control(placeholder="Telefono" type="text" ng-model="newEntidad.telefono")
 
@@ -81,7 +81,7 @@
 											small(ng-bind-html="' ' + $select.selected.nombre")
 										ui-select-choices(repeat="imagen in imagenes | filter: {nombre: $select.search}")
 											img(ng-src="{{ imagen.public?imgSystemPath:perfilPath }}{{ imagen.nombre }}" style="width:25px; height:25px;")
-											small(ng-bind-html="' ' + imagen.nombre | highligth: $select.search")
+											small(ng-bind-html="' ' + imagen.nombre | highlight: $select.search")
 							div(flex)
 								input.form-control(placeholder="Telefono" type="text" ng-model="currentEntidad.telefono")
 
