@@ -56,9 +56,9 @@
 
 
 					// Formulario para editar
-					div(flex-gt-md="40" flex-md="100" ng-show="creando")
+					div(flex-gt-md="40" flex-md="100" ng-show="editando")
 
-						form(layout="column" ng-submit="" layout-margin layout-wrap layout-padding)
+						form(layout="column" ng-submit="guardar_cambios()" layout-margin layout-wrap layout-padding)
 							div(flex)
 								label Nombre:
 								input.form-control(type="text" ng-model="currentEntidad.nombre")

@@ -40,6 +40,17 @@ angular.module('WissenSystem')
 		data: 
 			pageTitle: 'En Construcción'
 	})
+
+	.state('landing', {#_estado de raiz qie no necesitaba autenticacion})
+		url: '/landing'
+		views:
+			'principal':
+				templateUrl: App.views+'main/landing.tpl.html'
+				controller: 'LandingSCtrl' #el controlador esta en 'main.cofee'
+		data: 
+			pageTitle: 'Liceo Adventista Libertad'
+	})
+
 	.state('login', { 
 		url: '/login'
 		views:
@@ -55,7 +66,7 @@ angular.module('WissenSystem')
 		views:
 			'principal':
 				templateUrl: "#{App.views}login/logout.tpl.html"
-				controller: 'LogoutCtrl'
+				controller: 'LogintCtrl'
 		data: 
 			icon_fa: 'fa fa-user'
 

@@ -2,6 +2,9 @@ angular.module('WissenSystem')
 #- Run ejecuta código depués de haber configurado nuestro módulo con config()
 .run ['$rootScope', 'cfpLoadingBar', '$state', '$stateParams', '$translate', '$cookies', 'Restangular', 'Perfil', 'AuthService', 'AUTH_EVENTS', 'toastr', ($rootScope, cfpLoadingBar, $state, $stateParams, $translate, $cookies, Restangular, Perfil, AuthService, AUTH_EVENTS, toastr) ->
 
+	$rootScope.examen_actual = {"id":3 , "categoria_id":1, "evento_id":2, "actual":1, "descripcion":"prueba","duracion_preg":2, "duracion_exam":6, "one_by_one":1}
+
+
 
 	#- Asignamos la información de los estados actuales para poder manipularla en las vistas.
 	$rootScope.$state = $state

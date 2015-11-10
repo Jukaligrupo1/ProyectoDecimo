@@ -3,33 +3,52 @@ angular.module('WissenSystem')
 .factory('AuthService', ['Restangular', '$state', '$http', '$cookies', 'Perfil', '$rootScope', 'AUTH_EVENTS', '$q', '$filter', 'toastr', (Restangular, $state, $http, $cookies, Perfil, $rootScope, AUTH_EVENTS, $q, $filter, toastr)->
 	authService = {}
 
+
+	authService.verificar = false
+	authService.promesa_de_verificacion = {}
+
+
 	authService.verificar = ()->
-		d = $q.defer();
 
-		if Perfil.User().user_id
-			d.resolve Perfil.User()
+		if authService.verificando
+
+			return authService.promesa_de_verificacion
+
 		else
-			if $cookies.xtoken
-				if $cookies.xtoken != undefined and $cookies.xtoken != 'undefined'  and $cookies.xtoken != '[object Object]'
-					authService.login_from_token().then((usuario)->
-						Perfil.setUser usuario
-						d.resolve usuario
-					, (r2)->
-						console.log 'No se logueó from token'
-						d.reject r2
-					)
-				else
-					console.log 'Token mal estructurado: ', $cookies.xtoken
-					authService.borrarToken()
-					d.reject 'Token mal estructurado.'
+
+			d = $q.defer();
+
+			#no necesitaria verificar si ya se ha logueado
+			if Perfil.User().user_id
+				d.resolve Perfil.User()
 			else
-				console.log 'No hay token'
-				d.resolve 'No hay token.'
-				#$state.go 'login'
-				$rootScope.$broadcast(AUTH_EVENTS.notAuthenticated)
-		return d.promise
+				if $cookies.xtoken
+					if $cookies.xtoken != undefined and $cookies.xtoken != 'undefined'  and $cookies.xtoken != '[object Object]'
+						authService.login_from_token().then((usuario)->
+							Perfil.setUser usuario
+							d.resolve usuario
+						, (r2)->
+							console.log 'No se logueó from token'
+							d.reject r2
+							#authService.borrarToken()
+							#$rootScope.$broadcast(AUTH_EVENTS.notAuthenticated)
+					)
+					else
+						console.log 'Token mal estructurado: ', $cookies.xtoken
+						authService.borrarToken()
+						d.reject 'Token mal estructurado.'
+				
+				else
+					console.log 'No hay cookie token'
+					d.resolve 'No hay cookie token.'
+					$state.go 'login'
+					$rootScope.$broadcast(AUTH_EVENTS.notAuthenticated)
+		
+			authService.promesa_de_verificacion = d.promise
 
+			return authService.promesa_de_verificacion
 
+	
 	authService.verificar_acceso = ()->
 		if !Perfil.User().user_id
 			$state.go 'login'
@@ -73,7 +92,8 @@ angular.module('WissenSystem')
 
 				Perfil.setUser user
 
-				console.log 'Usuario traido: ', user
+				#console.log 'Usuario traido: ', user
+
 				
 				$rootScope.$broadcast AUTH_EVENTS.loginSuccess
 				d.resolve user
@@ -91,9 +111,11 @@ angular.module('WissenSystem')
 					toastr.warning 'La sesión ha expirado'
 					if $state.current.name != 'login'
 						$state.go 'login'
+
 					
 				else
 					$rootScope.$broadcast AUTH_EVENTS.loginFailed
+			
 			d.reject 'Error en login'
 		)
 		return d.promise
@@ -103,18 +125,26 @@ angular.module('WissenSystem')
 
 		d = $q.defer();
 
-		$http.defaults.headers.common['Authorization'] = 'Bearer ' + $cookies.xtoken
+		#console.log perfil.User().id
 
-		login = Restangular.one('login').post().then((usuario)->
+		if pefil.User().id or perfil.User().id == undefined
 
-			$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-			d.resolve usuario
+			$http.defaults.headers.common['Authorization'] = 'Bearer ' + $cookies.xtoken
 
-		, (r2)->
+			login = Restangular.one('login/verificar').post().then((usuario)->
+
+				$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+				d.resolve usuario
+
+			, (r2)->
 			console.log 'No se pudo loguear con token. ', r2
 			d.reject 'Error en login con token.'
 			#$rootScope.$broadcast AUTH_EVENTS.loginFailed
-		)
+			)
+		
+		else 
+			d.resolve perfil.User()
+			
 		return d.promise
 
 

@@ -1,0 +1,13 @@
+.modal-header
+	h3.modal-title ¿seguro que deseas eliminar?
+.modal-body
+	.row
+		.co-lg-12.col-xs-12
+			h4 Nivel:
+			div(style="text-overflow: ellipsis") {{elemento.niveles_traducidas[0].nombre}} - {{elemento.niveles_traducidas[0].abrev}}
+			h5 Id: {{elemento.id}}
+
+.modal-footer
+	button.btn.btn-labeled.btn_danger(ng-click="ok()") Eliminar
+		i.btn-label.fa.fa-times
+	button.btn.btn-yellow(ng-click="cancel()") Cancelar

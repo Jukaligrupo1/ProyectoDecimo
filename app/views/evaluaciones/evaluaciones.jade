@@ -1,0 +1,113 @@
+.panel.panel-default.panel-hovered.panel-stacked.mb20
+	.panel-heading
+
+		| {{'ENTIDADES_MENU' | translate}}
+
+	.panel-body
+
+
+		md-button.md-default.md-raised(ng-show="!creando" ng-click="crearNuevo()") Crear evaluacion 
+
+
+		div(layout layout-wrp layout-padding)
+
+			div(flex-gt-md="60" flex-md="100")
+
+				// Grilla con todas las evaluaciones
+				grid-evaluaciones(evaluaciones="evaluaciones" idioma="idioma.selected" currenteval="currentEvalu" categoriasking="categorias_king")
+
+
+
+			// Formulario para crear
+			div(flex-gt-md="40" flex-md="100" ng-show="creando")
+
+				h2 Nueva evaluacion
+
+				form(layout="colum" ng-submit="guardarNuevo()" layout-margin layout-wrp layout-padding)	
+					div(flex)
+						label Descripcion
+						input.form-control(type="text" ng-model="newEvaluacion.descripcion")
+
+					div(flex)
+						label Categoria
+						md-input-container(layout=row layout-aling="start center" style="paddig-bottom: 0px; margin-top: -10px")
+							md-select(placeholder="categoria" ng-model="newEvaluacion.categoria_id")
+								span(ng-repeat="catking in categorias_king")
+									md-option(ng-repeat="cat_traduc in catking.categorias_traducidas | catsByIdioma:idioma.selected")
+									|  {{cat_traduc.nombre}}
+
+
+					div(flex="40" flex-gt-lg="20" flex-sm="100")
+						md-checkbox(ng-model="newEvaluacion.actual" aria-label="Actual")
+							| Actual
+						md-tooltip será la evaluación que los participantes resolveran
+
+					div(flex)
+						label Duracion por pregunta:
+						input.form-control(placeholder="Duracion pregunta" type="number" ng-model="newEvaluacion.duracion_preg")
+						md-tooltip Duracion por pregunta cuando sea dirigido
+
+					div(flex)
+						label Duracion por examen:
+						input.form-control(placeholder="Duracion examen" type="number" ng-model="newEvaluacion.duracion_exam")
+						md-tooltip Duracion por pregunta cuando sea dirigido
+
+					div(flex="40" flex-gt-lg="20" flex-sm="100")
+						md-checkbox(ng-model="newEvaluacion.dirigido" aria-label="Resporder de una por una ")
+							| Responder una por una 
+						md-tooltip responder de una en una o todas las preguntas a la vez 
+
+
+
+					.clearfix.right
+						md-button.md-default.md-raised(type="button" ng-click="cancelarNuevo()") Cancelar
+						md-button.md-default.md-raised(type="submit" ng-disabled="guardando") Guardar
+
+
+
+			// Formulario para editar
+			div(flex-gt-md="40" flex-md="100" ng-show="creando")
+
+				h2 Editar evaluacion
+
+				form(layout="colum" ng-submit="guardarEdicion()" layout-margin layout-wrp layout-padding)	
+					div(flex)
+						label Descripcion
+						input.form-control(type="text" ng-model="currentEvalua.descripcion")
+
+					div(flex)
+						label Categoria
+						md-input-container(layout=row layout-aling="start center" style="paddig-bottom: 0px; margin-top: -10px")
+							md-select(placeholder="categoria" ng-model="currentEvalua.categoria_id")
+								span(ng-repeat="catking in categorias_king")
+									md-option(ng-repeat="cat_traduc in catking.categorias_traducidas | catsByIdioma:idioma.selected")
+									|  {{cat_traduc.nombre}}
+
+
+					div(flex="40" flex-gt-lg="20" flex-sm="100")
+						md-checkbox(ng-model="currentEvalua.actual" aria-label="Actual")
+							| Actual
+						md-tooltip será la evaluación que los participantes resolveran
+
+					div(flex)
+						label Duracion por pregunta:
+						input.form-control(placeholder="Duracion pregunta" type="number" ng-model="currentEvalua.duracion_preg")
+						md-tooltip Duracion por pregunta cuando sea dirigido
+
+					div(flex)
+						label Duracion por examen:
+						input.form-control(placeholder="Duracion examen" type="number" ng-model="newEvaluacion.duracion_exam")
+						md-tooltip Duracion por pregunta cuando sea dirigido
+
+					div(flex="40" flex-gt-lg="20" flex-sm="100")
+						md-checkbox(ng-model="currentEvalua.dirigido" aria-label="Resporder de una por una ")
+							| Responder una por una 
+						md-tooltip responder de una en una o todas las preguntas a la vez 
+
+
+
+					.clearfix.right
+						md-button.md-default.md-raised(type="button" ng-click="cancelarNuevo()") Cancelar
+						md-button.md-default.md-raised(type="submit" ng-disabled="guardando") Guardar
+						
+

@@ -4,18 +4,18 @@ angular.module('WissenSystem')
 .config(['$stateProvider', 'App', 'USER_ROLES', 'PERMISSIONS', '$translateProvider', ($stateProvider, App, USER_ROLES, PERMISSIONS, $translateProvider)->
 	
 
-	$stateProvider
+	#$stateProvider
 
-	.state('panel.login', { #- Estado admin.
-				url: '^/login'
-				views:
-					'contenido_panel':
-						templateUrl: "#{App.views}login/login.tpl.html"
-						controller: 'LoginCtrl'
+	#.state('panel.login', { #- Estado admin.
+				#url: '^/login'
+				#views:
+					#'contenido_panel':
+						#templateUrl: "#{App.views}login/login.tpl.html"
+						#controller: 'LoginCtrl'
 
-				data: 
-					pageTitle: 'Login'
-			})
+				#data: 
+					#pageTitle: 'Login'*/
+			#}) 
 
 	$translateProvider.translations('EN', 
 		LOGIN_MSG: 'Sing In to the panel'

@@ -29,13 +29,18 @@ angular.module('WissenSystem', [
 #- Valores que usaremos para nuestro proyecto
 .constant('App', (()->
 
-  #dominio = 'http://lalvirtual.com/wissen/' 
-  dominio = 'http://localhost/' # Pruebas en mi localhost
+  
+  #dominio = 'http://lalvirtual.com/wissen/'
+  #dominio = 'http://localhost/' # Pruebas en mi localhost
+  dominio = 'http://olimpiadaslibertad.com/' 
   
   console.log 'Entra al dominio: ', location.hostname
   
   if(location.hostname.match('lalvirtual'))
-    dominio = 'http://lalvirtual.com/wissen/public'
+    dominio = 'http://lalvirtual.com/wissen/'
+
+  if(location.hostname.match('olimpiadaslibertad'))
+    dominio = 'http://olimpiadaslibertad.com/'
   
   server = dominio + 'wissenLaravel/public/'
   #server = ''
@@ -49,12 +54,14 @@ angular.module('WissenSystem', [
     views: 'views/'
     #views: server + 'views/dist/views/' # Para el server Laravel
     images: server + 'images/'
+    perfilPath: server + 'images/perfil/'
+    imgSystemPath: server + 'images/eventos/'
   }
 )())
 
 
 .constant('AUTH_EVENTS', {
-  loginSuccess: 'auth-login-success',
+  loginSucces: 'auth-login-success',
   loginFailed: 'auth-login-failed',
   logoutSuccess: 'auth-logout-success',
   sessionTimeout: 'auth-session-timeout',

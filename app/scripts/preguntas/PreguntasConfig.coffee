@@ -27,5 +27,4 @@ angular.module('WissenSystem')
 		BTN_NUEVA_PREGUNTA: 'Nueva pregunta'
 		
 	 )
-
 ])

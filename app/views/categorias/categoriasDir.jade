@@ -19,9 +19,12 @@ div(ng-repeat="categoriaking in categorias_king")
 
 	div(ng-show ="categoriaking.editando" style="margin-top: 20px")
 		.panel.panel-default.panel-hovered.panel-stacked.mb20
-			.panel-heading Editar categoria en idiomas:
+			.panel-heading(ng-if="!evento_actual.es_idioma_unico" layout style="height: 40px; ")
+				span
+					| Editar categoria en idiomas:
 
-				md-select(multiple="true" placeholder="Idioma" ng-model="idiomasDiscEdit")
+				md-container(layout="row" layout-aling="start center" style="padding-buttom: 0px; margin-top: -10px;")
+				md-select(multiple="true" placeholder="Idioma" ng-model="categoriaking.idiomasEdit" ng.init="categoriaking.idiomasEdit=[eventoactual. idioma_princilal_id")
 					md-option(ng-repeat="idioma in idiomas" value="{{idioma.id}}") {{idioma.original}}
 
 			.panel-body
@@ -32,28 +35,29 @@ div(ng-repeat="categoriaking in categorias_king")
 						a.btn-tag.btn-tag-info(md-ink-ripple)
 							| Categoria en {{categoria.idioma}}
 
-						.row(style="padding-left: 50px; ")
-							.col-lg-4.col-sm-5.col-xs-12
-								.form-group
-									label Nombre categoria:
-									input.form-control(type="text" ng-model="categoria.nombre")
-							.col-lg-4.col-sm-5.col-xs-12
-								.form-group
-									label Nivel:
-									md-select(placeholder="Nivel" ng-model="categoria.nivel_id")
-										md-option(ng-repeat="nivelking in niveles_king" value="{{nivelking.id}}") {{nivelking.nombre}}
-							.col-lg-4.col-sm-5.col-xs-12
-								.form-group
-									label Disciplina:
-									md-select(placeholder="Disciplina" ng-model="categoria.disciplina_id")
-										md-option(ng-repeat="disciplinaking in disciplinas_king" value="{{disciplinaking.id}}") {{disciplinaking.nombre}}
-							
+						div(layout layout-margin layout-wrap layout-padding style="padding-left: 50px; ")
+							div(flex="40" flex-gt-lg="20" flex-sm="100")
+								label Nombre:
+								input.form-control(type="text" ng-model="categoria.nombre")
+							div(flex="40" flex-gt-lg="20" flex-sm="100")
+								label nivel:
+								md-select(placeholder="Nivel" mg-model="categoria.nivel.id")
+									md-option(ng-repeat="nivelking in niveles_king" value="{{nivelking.id}}") {{nivelking.nombre}}
+							div(flex="40" flex-gt-lg="20" flex-sm="100")
+								label Disciplina:
+								md-select(placeholder="Disciplina" mg-model="categoria.disciplina.id")
+									md-option(ng-repeat="disciplinaking in disciplinas_king" value="{{disciplinaking.id}}") {{disciplinaking.nombre}}
 
-							.col-lg-2.col-sm-2.col-xs-12
-								.form-group
-									md-checkbox(ng-model="categoria.traducido" aria-label="¿Traducido?")
-										| ¿Traducido?
-
+							div(ng-if="evento_actual.es_idioma_unico" flex="40" flex-gt-lg="20" flex-sm="100")
+								md-checkbox(ng-model="categoria.traducido" aria-label="¿Traducido?")
+									| ¿Traducido?
+		
 					.clearfix.right
-						md-button.md-primary(type="submit" ng-disabled="guardando(categoriaking)") Aplicar
-						md-button.md-default(ng-click="finalizar_edicion(categoriaking)") Finalizar
+						md-button.md-default(ng-click="cerrar_edicion(categoriaking)") Cerrar
+						md-button.md-primary(type="submit" ng-disabled="guardando(categoriaking)") Aplicar}
+						md-button.md-default(ng-click="finalizar_edicion(categoriaking)") finalizar
+
+
+md-button.md-primary(type="button" ng-disabled="creando" ng-click="crear_categoria()") Crear categoria
+
+						

@@ -1,12 +1,49 @@
 angular.module('WissenSystem')
 
-.controller('AddPreguntaCtrl', ['$scope', '$http', 'Restangular', '$state', '$cookies', '$rootScope', '$mdToast', 
-	($scope, $http, Restangular, $state, $cookies, $rootScope, $mdToast) ->
+.controller('AddPreguntaCtrl', ['$scope', '$http', 'Restangular', '$state', '$cookies', '$rootScope', '$mdToast', 'toastr',
+	($scope, $http, Restangular, $state, $cookies, $rootScope, $mdToast, toastr) ->
 
-
+		console.log 'App pregunta dir'
 		$scope.creando = false
 
 		$scope.addNewPregunta = ()->
+
+			$scope.creando = true
+
+			Restangular.one('preguntas/store').customPOST({categoria_id: $scope.categoria})
+				r.editando = true
+				$scope.creamdo = false
+				$scope.preguntasking.push r
+				console.log 'preguntas añadida:', $scope.preguntasking
+
+			(r2)->
+				console.log ' Rechazada la nueva', r2
+				$scope.creando = false
+				toastr.warning 'No se creo la pregunta', 'problema'
+			)
+
+
+
+		$scope.addNewPreguntaGrupo = ()->
+
+			$scope.creando = true
+
+			Restangular.one('grupo/store').customPOST({categoria_id: $scope.categoria}).then(r)->
+				r.editando = true
+				$scope.creamdo = false
+				$scope.preguntasking.push r
+				console.log 'preguntas añadida:', $scope.preguntasking
+
+			(r2)->
+				console.log ' Rechazada la nueva', r2
+				$scope.creando = false
+				toastr.warning 'No se creo la pregunta', 'problema'
+			)
+
+
+
+
+
 			$scope.preguntasking.push {
 				id: 4
 				descripcion: 'Una pregunta para traducir'

@@ -22,7 +22,21 @@ angular.module('WissenSystem')
 	.translations('ES',
 		ENTIDADES_MENU: 'Entidades'
 	)
+	.translations('PR',
+		ENTIDADES_MENU: 'Entidades'
+		CREAR_NUEVO_ENTIDADES:'Criar Novas'
+		NOMBRE_ENTIDADES:'Nome'
+		SELECCIONAR_LÍDER_ENTIDADES:'Escolha um Líder'
+		LOGO_ENTIDADES:'Logotipo'
+		GUARDAR_ENTIDADES:'Salvar'
+		CANCELAR_ENTIDADES:'Cancelar'
+		SEGURO_QUE_DESEA_ELIMINAR_REMOVE:'Claro, você quer Excluir'
+		ENTIDAD_REMOVE:'Endidate'
+		ELIMINAR_REMOVE:'Remover'
+		CANCELAR_REMOVE:'Cancelar'
 
+
+	)
 
 
 ])

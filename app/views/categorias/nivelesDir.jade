@@ -19,33 +19,40 @@ div(ng-repeat="nivelking in niveles_king")
 
 	div(ng-show ="nivelking.editando" style="margin-top: 20px")
 		.panel.panel-default.panel-hovered.panel-stacked.mb20
-			.panel-heading Editar nivel en idiomas:
+			.panel-heading((ng-if="!evento_actual.es_idioma_unico" layout style="height: 40px;")
+				span
+				| Editar nivel en idiomas:
 
-				md-select(multiple="true" placeholder="Idioma" ng-model="idiomasDiscEdit")
+				md-container(layout="row" layout-aling="start center" style="padding-buttom: 0px; margin-top: -10px;")
+				md-select(multiple="true" placeholder="Idioma" ng-model="nivelking.idiomasEdit" ng.init="nivelking.idiomasEdit=[eventoactual. idioma_princilal_id")
 					md-option(ng-repeat="idioma in idiomas" value="{{idioma.id}}") {{idioma.original}}
 
 			.panel-body
 				form.form-horizontal(name="frm" role="form")
 
-					div(ng-repeat="nivel in nivelking.niveles_traducidos | porIdiomasEdit:idiomasDiscEdit")
+					div(ng-repeat="nivel in nivelking.niveles_traducidos | porIdiomasEdit:nivelking.idiomasEdit")
 									
-						a.btn-tag.btn-tag-info(md-ink-ripple)
+						a.btn-tag.btn-tag-info(ng.if="!eventoactual.es_idioma_unico" md-ink-ripple)
 							| Nivel en {{nivel.idioma}}
 
 						.row(style="padding-left: 50px; ")
-							.col-lg-4.col-sm-5.col-xs-12
+							.col-lg-4.col-sm-5.cool-xs-12
 								.form-group
 									label Nombre nivel:
 									input.form-control(type="text" ng-model="nivel.nombre")
-							.col-lg-4.col-sm-5.col-xs-12
+							.col-lg-4.col-sm-5.cool-xs-12
 								.form-group
 									label Descripcion:
 									input.form-control(type="text" ng-model="nivel.descripcion")
-							.col-lg-2.col-sm-2.col-xs-12
+							.col-lg-4.col-sm-5.cool-xs-12(ng-if="!eventoactual.es_idioma_unico")
 								.form-group
-									md-checkbox(ng-model="nivel.traducido" aria-label="¿Traducido?")
+									md-checkbox(ng-model="nivel.traducido" ng-true-value="1" ng.false-value="0" aria-label="¿traducido?")
 										| ¿Traducido?
 
 					.clearfix.right
-						md-button.md-primary(type="submit" ng-disabled="guardando(nivelking)") Aplicar
+						md-button.md-default(ng-click="cerrar_edicion(nivelking)") Cerrar
+						md-button.md-primary(type="submit" ng-disabled="guardando(disciplinaking)") Aplicar
 						md-button.md-default(ng-click="finalizar_edicion(nivelking)") Finalizar
+
+
+md-button.md-primary(type="button" ng-disabled="creando" ng-click="crear_nivel()") Crear nivel

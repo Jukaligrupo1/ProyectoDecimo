@@ -3,3 +3,7 @@ md-button.md-raised.md-primary(ng-click="addNewPregunta()" ng-disabled="creando"
 	md-tooltip {{ 'TIP_BTN__NUEVA_PREGUNTA' | translate }}
 	| {{ 'BTN_NUEVA_PREGUNTA' | translate }}
 
+
+md-button.md-raised.md-primary(ng-click="addNewPreguntaGrupo()" ng-disabled="creando" ng-if="tipo=='gupo'") 
+	md-tooltip para crear cuadriculas o preguntas en  un contenido común.
+	| Nuevo grupo preguntas

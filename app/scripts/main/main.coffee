@@ -9,3 +9,12 @@ angular.module("WissenSystem")
 
 	return
 ])
+
+.controller('LandingCtrl',['$scope', '$window', 'interval', ($scope , $window, $interval)->
+
+
+	#console.log  'A cambiar desde main'
+	#$window.location.href = 'http://localhost/myyvc/oubkic';
+
+	return
+])
